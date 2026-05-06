@@ -1,12 +1,12 @@
 "use client";
 
-import { type HTMLAttributes, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../utils/cn";
 
 export type AlertVariant = "info" | "success" | "warning" | "error";
 
-export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, "className"> {
+export interface AlertProps {
   variant?: AlertVariant;
   title?: string;
   dismissible?: boolean;
@@ -56,7 +56,6 @@ export function Alert({
   visible = true,
   className,
   children,
-  ...props
 }: AlertProps) {
   const displayIcon = icon ?? iconMap[variant];
 
@@ -74,7 +73,6 @@ export function Alert({
             variantStyles[variant],
             className,
           )}
-          {...props}
         >
           <span className="mt-0.5 shrink-0">{displayIcon}</span>
           <div className="flex-1">
