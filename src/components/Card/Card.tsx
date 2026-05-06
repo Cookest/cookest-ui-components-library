@@ -44,17 +44,27 @@ const paddingStyles = {
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ variant = "default", padding = "md", className, children, ...props }, ref) => {
-    const Wrapper = variant === "interactive" ? motion.div : "div";
-    const motionProps =
-      variant === "interactive"
-        ? ({
-            whileHover: { y: -2, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" },
-            transition: { duration: 0.2 },
-          } as HTMLMotionProps<"div">)
-        : {};
+    if (variant === "interactive") {
+      return (
+        <motion.div
+          ref={ref}
+          whileHover={{ y: -2, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
+          transition={{ duration: 0.2 }}
+          className={cn(
+            "rounded-xl font-sans",
+            variantStyles[variant],
+            paddingStyles[padding],
+            className,
+          )}
+          {...(props as HTMLMotionProps<"div">)}
+        >
+          {children}
+        </motion.div>
+      );
+    }
 
     return (
-      <Wrapper
+      <div
         ref={ref}
         className={cn(
           "rounded-xl font-sans",
@@ -62,11 +72,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           paddingStyles[padding],
           className,
         )}
-        {...motionProps}
-        {...(props as Record<string, unknown>)}
+        {...props}
       >
         {children}
-      </Wrapper>
+      </div>
     );
   },
 );
