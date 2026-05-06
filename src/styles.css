@@ -1,6 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --color-ck-primary: #7a9a65;
+  --color-ck-primary-light: #b4cc9e;
+  --color-ck-primary-dark: #4e7a3a;
+}
+
 :root {
   --ck-primary: #7a9a65;
   --ck-primary-light: #b4cc9e;
