@@ -30,7 +30,7 @@ const motionVariants: Record<TooltipPosition, { initial: Record<string, number>;
 
 export function Tooltip({ content, position = "top", delay = 200, className, children }: TooltipProps) {
   const [visible, setVisible] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const show = () => {
     timeoutRef.current = setTimeout(() => setVisible(true), delay);
