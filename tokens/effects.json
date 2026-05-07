@@ -1,0 +1,35 @@
+{
+  "radius": {
+    "none": { "value": 0, "type": "dimension" },
+    "sm": { "value": 4, "type": "dimension" },
+    "md": { "value": 8, "type": "dimension" },
+    "lg": { "value": 12, "type": "dimension" },
+    "xl": { "value": 16, "type": "dimension" },
+    "2xl": { "value": 24, "type": "dimension" },
+    "full": { "value": 9999, "type": "dimension" }
+  },
+  "shadow": {
+    "none": { "value": "none", "type": "shadow" },
+    "sm": { "value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)", "type": "shadow" },
+    "md": { "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)", "type": "shadow" },
+    "lg": { "value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)", "type": "shadow" },
+    "xl": { "value": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)", "type": "shadow" },
+    "primary": { "value": "0 4px 16px rgba(122, 154, 101, 0.35)", "type": "shadow" },
+    "primaryHover": { "value": "0 8px 28px rgba(122, 154, 101, 0.5)", "type": "shadow" }
+  },
+  "transition": {
+    "fast": { "value": 150, "type": "duration", "description": "150ms" },
+    "normal": { "value": 250, "type": "duration", "description": "250ms" },
+    "slow": { "value": 350, "type": "duration", "description": "350ms" },
+    "bounce": { "value": 500, "type": "duration", "description": "500ms bounce" }
+  },
+  "zIndex": {
+    "base": { "value": 0, "type": "other" },
+    "dropdown": { "value": 10, "type": "other" },
+    "sticky": { "value": 20, "type": "other" },
+    "overlay": { "value": 30, "type": "other" },
+    "modal": { "value": 40, "type": "other" },
+    "popover": { "value": 50, "type": "other" },
+    "tooltip": { "value": 60, "type": "other" }
+  }
+}

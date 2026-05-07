@@ -1,0 +1,60 @@
+{
+  "color": {
+    "primary": {
+      "DEFAULT": { "value": "#7A9A65", "type": "color", "description": "Brand sage green" },
+      "light": { "value": "#B4CC9E", "type": "color" },
+      "dark": { "value": "#4E7A3A", "type": "color" },
+      "50": { "value": "#F0F5EC", "type": "color" },
+      "100": { "value": "#E1EBDA", "type": "color" },
+      "200": { "value": "#C3D7B5", "type": "color" },
+      "300": { "value": "#A5C390", "type": "color" },
+      "400": { "value": "#8FB07A", "type": "color" },
+      "500": { "value": "#7A9A65", "type": "color" },
+      "600": { "value": "#628050", "type": "color" },
+      "700": { "value": "#4E7A3A", "type": "color" },
+      "800": { "value": "#3A5C2C", "type": "color" },
+      "900": { "value": "#263D1D", "type": "color" },
+      "950": { "value": "#1A2B14", "type": "color" }
+    },
+    "background": {
+      "light": { "value": "#F5F5F0", "type": "color", "description": "Page background — light mode" },
+      "dark": { "value": "#0E1512", "type": "color", "description": "Page background — dark mode" }
+    },
+    "card": {
+      "light": { "value": "#FAFAF6", "type": "color" },
+      "dark": { "value": "#172019", "type": "color" }
+    },
+    "heading": {
+      "light": { "value": "#1C3A2A", "type": "color" },
+      "dark": { "value": "#E0EDE4", "type": "color" }
+    },
+    "text": {
+      "light": { "value": "#3D5040", "type": "color" },
+      "dark": { "value": "#B0C8B5", "type": "color" }
+    },
+    "muted": {
+      "light": { "value": "#7A8E74", "type": "color" },
+      "dark": { "value": "#6A8A70", "type": "color" }
+    },
+    "border": {
+      "light": { "value": "#E4EBE0", "type": "color" },
+      "dark": { "value": "#253D2E", "type": "color" }
+    },
+    "surface": {
+      "light": { "value": "#FFFFFF", "type": "color" },
+      "dark": { "value": "#1A261E", "type": "color" }
+    },
+    "surfaceMuted": {
+      "light": { "value": "rgba(245, 245, 240, 0.95)", "type": "color" },
+      "dark": { "value": "rgba(14, 21, 18, 0.95)", "type": "color" }
+    },
+    "status": {
+      "success": { "value": "#4CAF50", "type": "color" },
+      "warning": { "value": "#FF9800", "type": "color" },
+      "error": { "value": "#F44336", "type": "color" },
+      "info": { "value": "#2196F3", "type": "color" }
+    },
+    "white": { "value": "#FFFFFF", "type": "color" },
+    "black": { "value": "#000000", "type": "color" }
+  }
+}
