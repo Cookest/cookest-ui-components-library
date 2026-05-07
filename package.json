@@ -42,6 +42,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "tokens:build": "node style-dictionary.config.mjs",
     "lint": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\""
@@ -87,6 +88,7 @@
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "storybook": "^10.3.6",
+    "style-dictionary": "4",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.10",
