@@ -28,6 +28,7 @@ export 'src/tokens/cookest_tokens.dart';
 export 'src/theme/cookest_theme.dart';
 
 // Widgets
+export 'src/widgets/ck_accordion.dart';
 export 'src/widgets/ck_alert.dart';
 export 'src/widgets/ck_avatar.dart';
 export 'src/widgets/ck_badge.dart';
@@ -36,7 +37,12 @@ export 'src/widgets/ck_card.dart';
 export 'src/widgets/ck_divider.dart';
 export 'src/widgets/ck_input.dart';
 export 'src/widgets/ck_modal.dart';
+export 'src/widgets/ck_progress.dart';
 export 'src/widgets/ck_select.dart';
 export 'src/widgets/ck_skeleton.dart';
+export 'src/widgets/ck_slider.dart';
+export 'src/widgets/ck_spinner.dart';
+export 'src/widgets/ck_tabs.dart';
+export 'src/widgets/ck_textarea.dart';
 export 'src/widgets/ck_toggle.dart';
 export 'src/widgets/ck_tooltip.dart';
