@@ -1,0 +1,33 @@
+{
+  "name": "@cookest/ui-cli",
+  "version": "0.1.0",
+  "description": "CLI to add Cookest UI components to React and Flutter projects",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "cookest-ui": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0",
+    "prompts": "^2.4.2",
+    "framer-motion": "latest"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.15.3",
+    "@types/prompts": "^2.4.9",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
