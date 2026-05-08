@@ -1,6 +1,6 @@
 {
   "name": "@cookest/ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Cookest design system — React component library with TailwindCSS 4 and Framer Motion",
   "license": "UNLICENSED",
   "author": "Cookest <hello@cookest.com>",
