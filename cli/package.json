@@ -1,24 +1,50 @@
 {
   "name": "@cookest/ui-cli",
   "version": "0.1.0",
-  "description": "CLI to add Cookest UI components to React and Flutter projects",
+  "description": "CLI to add Cookest UI components to React and Flutter projects — shadcn-style",
   "license": "MIT",
+  "author": "Cookest <hello@cookest.com>",
+  "homepage": "https://github.com/Cookest/cookest-ui-components-library/tree/main/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cookest/cookest-ui-components-library.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/Cookest/cookest-ui-components-library/issues"
+  },
+  "keywords": [
+    "cookest",
+    "ui",
+    "components",
+    "react",
+    "flutter",
+    "cli",
+    "design-system",
+    "tailwindcss",
+    "shadcn"
+  ],
   "type": "commonjs",
   "bin": {
     "cookest-ui": "./dist/index.js"
   },
   "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "prepublishOnly": "bun run build"
   },
   "dependencies": {
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "fs-extra": "^11.3.0",
-    "prompts": "^2.4.2",
-    "framer-motion": "latest"
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
@@ -29,5 +55,9 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
