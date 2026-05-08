@@ -35,5 +35,23 @@ export type { AlertProps, AlertVariant, AlertSize } from "./components/Alert";
 export { Divider } from "./components/Divider";
 export type { DividerProps, DividerOrientation } from "./components/Divider";
 
+export { Tabs } from "./components/Tabs";
+export type { TabsProps, TabItem } from "./components/Tabs";
+
+export { Accordion } from "./components/Accordion";
+export type { AccordionProps, AccordionItem } from "./components/Accordion";
+
+export { Textarea } from "./components/Textarea";
+export type { TextareaProps, TextareaSize } from "./components/Textarea";
+
+export { Slider } from "./components/Slider";
+export type { SliderProps, SliderMark, SliderSize, SliderColor } from "./components/Slider";
+
+export { Progress } from "./components/Progress";
+export type { ProgressProps, ProgressSize, ProgressColor } from "./components/Progress";
+
+export { Spinner } from "./components/Spinner";
+export type { SpinnerProps, SpinnerSize, SpinnerColor } from "./components/Spinner";
+
 // Utilities
 export { cn } from "./utils/cn";
