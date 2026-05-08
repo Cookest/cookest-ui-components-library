@@ -1,0 +1,54 @@
+name: Publish @cookest/ui to npm
+
+on:
+  push:
+    tags:
+      - 'ui-v*'   # Trigger on tags like ui-v0.1.0, ui-v1.2.3
+
+jobs:
+  publish:
+    name: Build and publish @cookest/ui
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node (for npm publish)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build library
+        run: bun run build
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#ui-v}" >> $GITHUB_OUTPUT
+
+      - name: Verify package version matches tag
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION="${{ steps.version.outputs.VERSION }}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"
+            exit 1
+          fi
+          echo "✔ Version $PKG_VERSION matches tag"
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
