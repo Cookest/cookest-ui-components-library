@@ -30,7 +30,7 @@ export { Skeleton, SkeletonCard } from "./components/Skeleton";
 export type { SkeletonProps, SkeletonVariant } from "./components/Skeleton";
 
 export { Alert } from "./components/Alert";
-export type { AlertProps, AlertVariant } from "./components/Alert";
+export type { AlertProps, AlertVariant, AlertSize } from "./components/Alert";
 
 export { Divider } from "./components/Divider";
 export type { DividerProps, DividerOrientation } from "./components/Divider";

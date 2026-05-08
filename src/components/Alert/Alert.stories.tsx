@@ -15,14 +15,16 @@ export const Success: Story = { args: { variant: "success", title: "Saved", chil
 export const Warning: Story = { args: { variant: "warning", title: "Expiring soon", children: "3 items in your pantry expire this week." } };
 export const Error: Story = { args: { variant: "error", title: "Error", children: "Failed to save meal plan. Please try again." } };
 export const Dismissible: Story = { args: { variant: "info", title: "Notice", children: "This alert can be dismissed.", dismissible: true } };
+export const Small: Story = { args: { variant: "success", size: "sm", title: "Saved", children: "Compact size alert." } };
+export const Large: Story = { args: { variant: "warning", size: "lg", title: "Warning", children: "Large size alert with more breathing room." } };
 
 export const AllVariants: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 500 }}>
-      <Alert variant="info" title="Info">Informational message.</Alert>
-      <Alert variant="success" title="Success">Operation completed.</Alert>
-      <Alert variant="warning" title="Warning">Proceed with caution.</Alert>
-      <Alert variant="error" title="Error">Something went wrong.</Alert>
+      <Alert variant="info" title="Info">Informational message about your meal plan.</Alert>
+      <Alert variant="success" title="Success">Recipe saved to your collection.</Alert>
+      <Alert variant="warning" title="Warning">3 pantry items expire this week.</Alert>
+      <Alert variant="error" title="Error">Failed to sync. Check your connection.</Alert>
     </div>
   ),
 };
