@@ -4,6 +4,7 @@ import { runInit } from './commands/init.js';
 import { runList } from './commands/list.js';
 import { runAdd } from './commands/add.js';
 import { runDiff } from './commands/diff.js';
+import { runCompletion } from './commands/completion.js';
 
 const program = new Command();
 
@@ -59,6 +60,14 @@ program
   .option('--flutter', 'check Flutter widget files')
   .action(async (components: string[], opts) => {
     await runDiff(components, { flutter: opts.flutter });
+  });
+
+// ─── completion ───────────────────────────────────────────────────────────────
+program
+  .command('completion [shell]')
+  .description('Generate shell completion script (bash, zsh, fish)')
+  .action((shell?: string) => {
+    runCompletion(shell);
   });
 
 program.parse();
