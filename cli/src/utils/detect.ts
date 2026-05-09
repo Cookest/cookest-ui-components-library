@@ -70,15 +70,15 @@ export async function detectFramework(): Promise<ProjectInfo> {
 }
 
 /** Resolve the path to the ui-components source directory.
- *  Looks for a .cookestrc config first, then walks up looking for ui-components/. */
-export async function resolveSourceRoot(configPath?: string): Promise<string> {
+ *  Returns null when no local source is found — the add command will fetch from the registry. */
+export async function resolveSourceRoot(configPath?: string): Promise<string | null> {
   // 1. Use config if present
   if (configPath && existsSync(configPath)) {
     const cfg = JSON.parse(await readFile(configPath, 'utf-8'));
     if (cfg.sourceRoot) return path.resolve(cfg.sourceRoot);
   }
 
-  // 2. Walk up looking for .cookestrc
+  // 2. Walk up looking for .cookestrc with sourceRoot
   const rcRoot = findRoot('.cookestrc');
   if (rcRoot) {
     try {
@@ -92,20 +92,18 @@ export async function resolveSourceRoot(configPath?: string): Promise<string> {
     return path.resolve(process.env.COOKEST_SOURCE_ROOT);
   }
 
-  // 4. Walk up looking for ui-components/ directory
+  // 4. Walk up looking for cookest-ui-components-library/ or ui-components/ directory
   let dir = process.cwd();
   while (true) {
-    const candidate = path.join(dir, 'ui-components');
-    if (existsSync(candidate) && existsSync(path.join(candidate, 'src'))) {
-      return candidate;
+    for (const candidate of ['cookest-ui-components-library', 'ui-components']) {
+      const p = path.join(dir, candidate);
+      if (existsSync(p) && existsSync(path.join(p, 'src'))) return p;
     }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
   }
 
-  throw new Error(
-    'Could not locate Cookest UI source.\n' +
-    'Run `cookest-ui init` to create a .cookestrc config, or set COOKEST_SOURCE_ROOT.'
-  );
+  // No local source — caller will use remote registry
+  return null;
 }

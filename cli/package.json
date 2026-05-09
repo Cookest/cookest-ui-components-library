@@ -1,6 +1,6 @@
 {
   "name": "@cookest/ui-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI to add Cookest UI components to React and Flutter projects — shadcn-style",
   "license": "MIT",
   "author": "Cookest <hello@cookest.com>",

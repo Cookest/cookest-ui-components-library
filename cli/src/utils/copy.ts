@@ -1,12 +1,22 @@
 import { existsSync } from 'fs';
-import { copyFile, mkdir, readFile, writeFile } from 'fs/promises';
+import { copyFile, mkdir, writeFile } from 'fs/promises';
 import path from 'path';
 import chalk from 'chalk';
 import type { ReactFile, FlutterFile } from '../registry.js';
 
+const GITHUB_RAW =
+  'https://raw.githubusercontent.com/Cookest/cookest-ui-components-library/main';
+
+async function fetchRemoteFile(srcPath: string): Promise<string> {
+  const url = `${GITHUB_RAW}/${srcPath}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status} — ${url}`);
+  return res.text();
+}
+
 export async function copyFiles(
   files: (ReactFile | FlutterFile)[],
-  sourceRoot: string,
+  sourceRoot: string | null,
   projectRoot: string,
   overwrite: boolean = false,
 ): Promise<{ copied: string[]; skipped: string[] }> {
@@ -14,13 +24,7 @@ export async function copyFiles(
   const skipped: string[] = [];
 
   for (const file of files) {
-    const src = path.join(sourceRoot, file.src);
     const dest = path.join(projectRoot, file.dest);
-
-    if (!existsSync(src)) {
-      console.warn(chalk.yellow(`  ⚠ Source not found: ${file.src}`));
-      continue;
-    }
 
     if (existsSync(dest) && !overwrite) {
       skipped.push(file.dest);
@@ -28,12 +32,30 @@ export async function copyFiles(
     }
 
     await mkdir(path.dirname(dest), { recursive: true });
-    await copyFile(src, dest);
+
+    if (sourceRoot) {
+      const src = path.join(sourceRoot, file.src);
+      if (!existsSync(src)) {
+        console.warn(chalk.yellow(`  ⚠ Source not found locally: ${file.src}`));
+        continue;
+      }
+      await copyFile(src, dest);
+    } else {
+      try {
+        const content = await fetchRemoteFile(file.src);
+        await writeFile(dest, content, 'utf-8');
+      } catch (err) {
+        console.warn(chalk.yellow(`  ⚠ Could not fetch: ${file.src} — ${(err as Error).message}`));
+        continue;
+      }
+    }
+
     copied.push(file.dest);
   }
 
   return { copied, skipped };
 }
+
 
 /** Add npm dependencies to the project's package.json (devDependencies untouched). */
 export async function addNpmDependencies(

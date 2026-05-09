@@ -3,12 +3,10 @@ import { writeFile } from 'fs/promises';
 import path from 'path';
 import chalk from 'chalk';
 import prompts from 'prompts';
-import { detectFramework, resolveSourceRoot } from '../utils/detect.js';
+import { detectFramework } from '../utils/detect.js';
 
 export type CookestConfig = {
   framework: 'react' | 'flutter';
-  /** Path to ui-components source root, relative to the .cookestrc location */
-  sourceRoot: string;
   /** For React: where components should be copied */
   componentsDir?: string;
   /** For Flutter: where widgets should be copied */
@@ -16,69 +14,71 @@ export type CookestConfig = {
 };
 
 export async function runInit(opts: { yes?: boolean }) {
-  console.log(chalk.bold('\n🌿 Cookest UI — Init\n'));
+  console.log(chalk.bold('\n  Cookest UI\n'));
 
   const project = await detectFramework();
-
   let framework = project.framework;
+
   if (framework === 'unknown') {
     const { fw } = await prompts({
       type: 'select',
       name: 'fw',
-      message: 'Which framework are you using?',
+      message: 'Framework:',
       choices: [
         { title: 'React / Next.js', value: 'react' },
         { title: 'Flutter', value: 'flutter' },
       ],
     });
+    if (!fw) return;
     framework = fw;
   } else {
-    console.log(chalk.green(`  ✔ Detected: ${framework === 'react' ? 'React' : 'Flutter'}`));
+    const label =
+      framework === 'react'
+        ? project.packageManager
+          ? `React  (${project.packageManager})`
+          : 'React'
+        : 'Flutter';
+    console.log(chalk.green(`  ✔ ${label} detected`));
   }
-
-  // Locate source root
-  let sourceRoot: string;
-  try {
-    sourceRoot = await resolveSourceRoot();
-    const rel = path.relative(project.root, sourceRoot);
-    console.log(chalk.green(`  ✔ Found ui-components source: ${rel}`));
-  } catch {
-    const { sr } = await prompts({
-      type: 'text',
-      name: 'sr',
-      message: 'Path to ui-components directory (relative or absolute):',
-      initial: '../ui-components',
-    });
-    sourceRoot = path.resolve(project.root, sr);
-    if (!existsSync(sourceRoot)) {
-      console.error(chalk.red(`  ✘ Path not found: ${sourceRoot}`));
-      process.exit(1);
-    }
-  }
-
-  const config: CookestConfig = {
-    framework: framework as 'react' | 'flutter',
-    sourceRoot: path.relative(project.root, sourceRoot),
-    ...(framework === 'react'
-      ? { componentsDir: 'src/components/ui' }
-      : { libDir: 'lib/ui' }),
-  };
 
   const rcPath = path.join(project.root, '.cookestrc');
   if (existsSync(rcPath) && !opts.yes) {
     const { overwrite } = await prompts({
       type: 'confirm',
       name: 'overwrite',
-      message: '.cookestrc already exists. Overwrite?',
+      message: '.cookestrc already exists — overwrite?',
       initial: false,
     });
     if (!overwrite) {
-      console.log(chalk.dim('  Skipped.'));
+      console.log(chalk.dim('\n  Skipped.\n'));
       return;
     }
   }
 
+  const config: CookestConfig = {
+    framework: framework as 'react' | 'flutter',
+    ...(framework === 'react'
+      ? { componentsDir: 'src/components/ui' }
+      : { libDir: 'lib/ui' }),
+  };
+
   await writeFile(rcPath, JSON.stringify(config, null, 2) + '\n', 'utf-8');
-  console.log(chalk.green(`\n  ✔ Created .cookestrc`));
-  console.log(chalk.dim(`\n  Next: cookest-ui list\n  Then: cookest-ui add button\n`));
+  console.log(chalk.green('  ✔ Created .cookestrc\n'));
+
+  // Print next steps
+  const pm = project.packageManager ?? 'npm';
+  const addCmd =
+    pm === 'bun'
+      ? 'bun add'
+      : pm === 'pnpm'
+        ? 'pnpm add'
+        : pm === 'yarn'
+          ? 'yarn add'
+          : 'npm install';
+
+  console.log(chalk.bold('  Next steps\n'));
+  console.log(`  ${chalk.dim('1.')} ${chalk.white(`${addCmd} @cookest/ui`)}`);
+  console.log(`  ${chalk.dim('2.')} ${chalk.white('cookest-ui add button input badge')}`);
+  console.log(`  ${chalk.dim('3.')} ${chalk.cyan('import { Button } from "@cookest/ui"')}\n`);
+  console.log(chalk.dim('  Docs: https://docs.cookest.app\n'));
 }

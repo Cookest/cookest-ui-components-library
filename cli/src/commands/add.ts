@@ -62,16 +62,15 @@ export async function runAdd(components: string[], opts: AddOptions) {
     process.exit(1);
   }
 
-  // Resolve source root
-  let sourceRoot: string;
-  try {
-    sourceRoot = await resolveSourceRoot();
-  } catch (err) {
-    console.error(chalk.red((err as Error).message));
-    process.exit(1);
+  // Resolve source root (null = fetch from GitHub registry)
+  const sourceRoot = await resolveSourceRoot();
+  if (sourceRoot) {
+    console.log(chalk.dim(`  Source: ${path.relative(project.root, sourceRoot)}\n`));
+  } else {
+    console.log(chalk.dim('  Fetching from registry (github.com/Cookest)\n'));
   }
 
-  console.log(chalk.bold(`\n🌿 Adding ${targets.length} component${targets.length > 1 ? 's' : ''} (${framework})\n`));
+  console.log(chalk.bold(`  Adding ${targets.length} component${targets.length > 1 ? 's' : ''} (${framework})\n`));
 
   const allMissingNpmDeps = new Set<string>();
   const allMissingPubDeps = new Set<string>();

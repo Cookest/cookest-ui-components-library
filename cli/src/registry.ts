@@ -13,9 +13,13 @@ export type FlutterFile = {
   dest: string;
 };
 
+export type Category = 'input' | 'display' | 'navigation' | 'layout';
+
 export type ComponentEntry = {
   /** Human-readable description */
   description: string;
+  /** Group for display purposes */
+  category: Category;
   /** Tags for search / filtering */
   tags: string[];
   react?: {
@@ -35,6 +39,7 @@ export type Registry = Record<string, ComponentEntry>;
 export const registry: Registry = {
   button: {
     description: 'Pressable button with variants, loading state, and icon support.',
+    category: 'input',
     tags: ['action', 'form', 'interactive'],
     react: {
       files: [
@@ -52,6 +57,7 @@ export const registry: Registry = {
   },
   input: {
     description: 'Text input with label, error, helper text, and leading/trailing icons.',
+    category: 'input',
     tags: ['form', 'text', 'field'],
     react: {
       files: [
@@ -68,6 +74,7 @@ export const registry: Registry = {
   },
   textarea: {
     description: 'Multi-line text area with character count, auto-resize, and validation.',
+    category: 'input',
     tags: ['form', 'text', 'field', 'multiline'],
     react: {
       files: [
@@ -84,6 +91,7 @@ export const registry: Registry = {
   },
   card: {
     description: 'Container with header, body, footer, and interactive variant.',
+    category: 'layout',
     tags: ['layout', 'container', 'surface'],
     react: {
       files: [
@@ -101,6 +109,7 @@ export const registry: Registry = {
   },
   badge: {
     description: 'Status label — info, success, warning, error, neutral. Supports dot and removable.',
+    category: 'display',
     tags: ['label', 'status', 'tag'],
     react: {
       files: [
@@ -117,6 +126,7 @@ export const registry: Registry = {
   },
   avatar: {
     description: 'User avatar with image, initials fallback, status dot, and size variants.',
+    category: 'display',
     tags: ['user', 'profile', 'image'],
     react: {
       files: [
@@ -133,6 +143,7 @@ export const registry: Registry = {
   },
   modal: {
     description: 'Dialog / bottom sheet with animated transitions and focus trap.',
+    category: 'display',
     tags: ['overlay', 'dialog', 'popup'],
     react: {
       files: [
@@ -150,6 +161,7 @@ export const registry: Registry = {
   },
   tooltip: {
     description: 'Contextual tooltip overlay with positioning and animation.',
+    category: 'display',
     tags: ['overlay', 'info', 'popup'],
     react: {
       files: [
@@ -166,6 +178,7 @@ export const registry: Registry = {
   },
   toggle: {
     description: 'Animated on/off switch with label and size variants.',
+    category: 'input',
     tags: ['form', 'switch', 'interactive'],
     react: {
       files: [
@@ -183,6 +196,7 @@ export const registry: Registry = {
   },
   select: {
     description: 'Custom dropdown with search, keyboard navigation, and ARIA combobox.',
+    category: 'input',
     tags: ['form', 'dropdown', 'picker'],
     react: {
       files: [
@@ -200,6 +214,7 @@ export const registry: Registry = {
   },
   skeleton: {
     description: 'Loading placeholders — text lines, circle, and card variants.',
+    category: 'display',
     tags: ['loading', 'placeholder', 'state'],
     react: {
       files: [
@@ -215,6 +230,7 @@ export const registry: Registry = {
   },
   alert: {
     description: 'Info, success, warning, error banners with glassmorphism and dismiss.',
+    category: 'display',
     tags: ['feedback', 'notification', 'banner'],
     react: {
       files: [
@@ -232,6 +248,7 @@ export const registry: Registry = {
   },
   divider: {
     description: 'Horizontal or vertical rule with optional label.',
+    category: 'layout',
     tags: ['layout', 'separator'],
     react: {
       files: [
@@ -248,6 +265,7 @@ export const registry: Registry = {
   },
   slider: {
     description: 'Range slider with marks, color variants, and value badge.',
+    category: 'input',
     tags: ['form', 'range', 'input'],
     react: {
       files: [
@@ -264,6 +282,7 @@ export const registry: Registry = {
   },
   progress: {
     description: 'Determinate and indeterminate progress bar with striped and animated modes.',
+    category: 'display',
     tags: ['loading', 'feedback', 'state'],
     react: {
       files: [
@@ -279,6 +298,7 @@ export const registry: Registry = {
   },
   spinner: {
     description: 'Animated loading spinner with dual-arc design and color variants.',
+    category: 'display',
     tags: ['loading', 'state', 'animation'],
     react: {
       files: [
@@ -295,6 +315,7 @@ export const registry: Registry = {
   },
   tabs: {
     description: 'Tab navigation with underline, pills, and boxed variants.',
+    category: 'navigation',
     tags: ['navigation', 'layout', 'interactive'],
     react: {
       files: [
@@ -312,6 +333,7 @@ export const registry: Registry = {
   },
   accordion: {
     description: 'Animated expandable panels — default, bordered, and separated variants.',
+    category: 'navigation',
     tags: ['layout', 'disclosure', 'interactive'],
     react: {
       files: [
