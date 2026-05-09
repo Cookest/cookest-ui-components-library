@@ -27,37 +27,37 @@ const variantConfig: Record<
     accent: "bg-blue-500",
     glass:
       "bg-blue-500/10 border-blue-400/30 dark:bg-blue-400/10 dark:border-blue-400/25",
-    iconColor: "text-blue-500 dark:text-blue-400",
+    iconColor: "text-blue-600 dark:text-blue-400",
     titleColor: "text-blue-900 dark:text-blue-200",
-    bodyColor: "text-blue-800/80 dark:text-blue-300/90",
-    shadow: "shadow-blue-500/15",
+    bodyColor: "text-blue-800 dark:text-blue-300/90",
+    shadow: "shadow-blue-500/10",
   },
   success: {
     accent: "bg-emerald-500",
     glass:
       "bg-emerald-500/10 border-emerald-400/30 dark:bg-emerald-400/10 dark:border-emerald-400/25",
-    iconColor: "text-emerald-500 dark:text-emerald-400",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
     titleColor: "text-emerald-900 dark:text-emerald-200",
-    bodyColor: "text-emerald-800/80 dark:text-emerald-300/90",
-    shadow: "shadow-emerald-500/15",
+    bodyColor: "text-emerald-800 dark:text-emerald-300/90",
+    shadow: "shadow-emerald-500/10",
   },
   warning: {
     accent: "bg-amber-500",
     glass:
       "bg-amber-500/10 border-amber-400/30 dark:bg-amber-400/10 dark:border-amber-400/25",
-    iconColor: "text-amber-500 dark:text-amber-400",
+    iconColor: "text-amber-600 dark:text-amber-400",
     titleColor: "text-amber-900 dark:text-amber-200",
-    bodyColor: "text-amber-800/80 dark:text-amber-300/90",
-    shadow: "shadow-amber-500/15",
+    bodyColor: "text-amber-800 dark:text-amber-300/90",
+    shadow: "shadow-amber-500/10",
   },
   error: {
     accent: "bg-red-500",
     glass:
       "bg-red-500/10 border-red-400/30 dark:bg-red-400/10 dark:border-red-400/25",
-    iconColor: "text-red-500 dark:text-red-400",
+    iconColor: "text-red-600 dark:text-red-400",
     titleColor: "text-red-900 dark:text-red-200",
-    bodyColor: "text-red-800/80 dark:text-red-300/90",
-    shadow: "shadow-red-500/15",
+    bodyColor: "text-red-800 dark:text-red-300/90",
+    shadow: "shadow-red-500/10",
   },
 };
 
@@ -116,7 +116,7 @@ export function Alert({
           transition={{ duration: 0.2, ease: "easeOut" }}
           className={cn(
             "relative flex items-start overflow-hidden rounded-xl border font-sans",
-            "backdrop-blur-sm shadow-lg",
+            "backdrop-blur-md shadow-md",
             cfg.glass,
             cfg.shadow,
             sz.gap,

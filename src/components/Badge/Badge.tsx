@@ -18,10 +18,10 @@ export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "class
 
 const variantStyles: Record<BadgeVariant, string> = {
   default: "bg-[var(--ck-bg-card)] text-[var(--ck-heading)] border border-[var(--ck-border)]",
-  success: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300",
-  warning: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
-  error: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
-  info: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+  success: "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/30 dark:text-emerald-300",
+  warning: "bg-amber-100 text-amber-900 dark:bg-amber-900/30 dark:text-amber-300",
+  error: "bg-red-100 text-red-900 dark:bg-red-900/30 dark:text-red-300",
+  info: "bg-blue-100 text-blue-900 dark:bg-blue-900/30 dark:text-blue-300",
 };
 
 const dotColorStyles: Record<BadgeVariant, string> = {
