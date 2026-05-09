@@ -37,12 +37,12 @@ export const buttonSizeStyles: Record<ButtonSize, string> = {
 };
 
 export const buttonBaseStyles =
-  "relative inline-flex cursor-pointer items-center justify-center font-sans font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ck-primary)] disabled:cursor-not-allowed disabled:opacity-50";
+  "relative inline-flex cursor-pointer items-center justify-center font-sans font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ck-primary)] disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden";
 
 function LoadingSpinner({ className }: { className?: string }) {
   return (
     <svg
-      className={cn("animate-spin", className)}
+      className={cn("animate-spin shrink-0", className)}
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -105,7 +105,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && <LoadingSpinner />}
         {!loading && iconLeft}
-        <span className={loading ? "opacity-70" : ""}>{children}</span>
+        {loading ? <span className="opacity-70">{children}</span> : children}
         {!loading && iconRight}
       </motion.button>
     );
