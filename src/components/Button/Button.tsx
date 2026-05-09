@@ -19,7 +19,7 @@ export interface ButtonProps
   children: ReactNode;
 }
 
-const variantStyles: Record<ButtonVariant, string> = {
+export const buttonVariantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-[var(--ck-primary)] text-white hover:bg-[var(--ck-primary-dark)] shadow-[0_4px_16px_rgba(122,154,101,0.35)] hover:shadow-[0_8px_28px_rgba(122,154,101,0.5)]",
   secondary:
@@ -30,11 +30,14 @@ const variantStyles: Record<ButtonVariant, string> = {
     "bg-[var(--ck-error)] text-white hover:bg-red-700 shadow-[0_4px_16px_rgba(244,67,54,0.3)]",
 };
 
-const sizeStyles: Record<ButtonSize, string> = {
+export const buttonSizeStyles: Record<ButtonSize, string> = {
   sm: "px-3 py-1.5 text-sm gap-1.5 rounded-lg",
   md: "px-5 py-2.5 text-sm gap-2 rounded-xl",
   lg: "px-7 py-3.5 text-base gap-2.5 rounded-xl",
 };
+
+export const buttonBaseStyles =
+  "relative inline-flex cursor-pointer items-center justify-center font-sans font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ck-primary)] disabled:cursor-not-allowed disabled:opacity-50";
 
 function LoadingSpinner({ className }: { className?: string }) {
   return (
@@ -90,11 +93,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         whileTap={isDisabled ? undefined : { scale: 0.98 }}
         transition={{ duration: 0.15 }}
         className={cn(
-          "relative inline-flex cursor-pointer items-center justify-center font-sans font-semibold transition-all",
-          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ck-primary)]",
-          "disabled:cursor-not-allowed disabled:opacity-50",
-          variantStyles[variant],
-          sizeStyles[size],
+          buttonBaseStyles,
+          buttonVariantStyles[variant],
+          buttonSizeStyles[size],
           fullWidth && "w-full",
           className,
         )}
