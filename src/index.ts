@@ -17,7 +17,7 @@ export type { AvatarProps, AvatarGroupProps, AvatarSize } from "./components/Ava
 export { Modal } from "./components/Modal";
 export type { ModalProps, ModalSize } from "./components/Modal";
 
-export { Tooltip } from "./components/Tooltip";
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./components/Tooltip";
 export type { TooltipProps, TooltipPosition } from "./components/Tooltip";
 
 export { Toggle } from "./components/Toggle";
@@ -55,3 +55,37 @@ export type { SpinnerProps, SpinnerSize, SpinnerColor } from "./components/Spinn
 
 // Utilities
 export { cn } from "./utils/cn";
+
+// Shadcn additions
+export * from "./components/AlertDialog";
+export * from "./components/AspectRatio";
+export * from "./components/Breadcrumb";
+export * from "./components/Calendar";
+export * from "./components/Carousel";
+export * from "./components/Chart";
+export * from "./components/Checkbox";
+export * from "./components/Collapsible";
+export * from "./components/Command";
+export * from "./components/ContextMenu";
+export * from "./components/Dialog";
+export * from "./components/Drawer";
+export * from "./components/DropdownMenu";
+export * from "./components/Form";
+export * from "./components/HoverCard";
+export * from "./components/InputOTP";
+export * from "./components/Label";
+export * from "./components/Menubar";
+export * from "./components/NavigationMenu";
+export * from "./components/Pagination";
+export * from "./components/Popover";
+export * from "./components/RadioGroup";
+export * from "./components/Resizable";
+export * from "./components/ScrollArea";
+export * from "./components/Sheet";
+export * from "./components/Sidebar";
+export * from "./components/Separator";
+export { Toaster as SonnerToaster } from "./components/Sonner";
+export * from "./components/Switch";
+export * from "./components/Table";
+export * from "./components/Toast";
+export * from "./components/ToggleGroup";
