@@ -51,7 +51,7 @@ const SheetContent = React.forwardRef<
       <SheetPrimitive.Content
         ref={ref}
         className={cn(
-          "fixed z-50 gap-4 bg-[var(--ck-surface)] p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 border-[var(--ck-border)]",
+          "fixed z-50 gap-4 bg-[var(--ck-surface)] p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 border-[var(--ck-border)] overflow-hidden",
           sideStyles[side],
           className
         )}
