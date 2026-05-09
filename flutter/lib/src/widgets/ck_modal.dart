@@ -69,7 +69,7 @@ class CkModal extends StatelessWidget {
           ),
         );
       },
-      pageBuilder: (context, _, __) {
+      pageBuilder: (context, animation1, animation2) {
         return CkModal(
           title: title,
           size: size,

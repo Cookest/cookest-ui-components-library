@@ -219,7 +219,7 @@ class _CkTextareaState extends State<CkTextarea> {
                   child: hasError
                       ? Text(
                           widget.errorText!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: CookestTokens.fontSizeXs,
                             color: CookestTokens.colorStatusError,
                           ),

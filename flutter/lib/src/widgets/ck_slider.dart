@@ -160,7 +160,7 @@ class CkSlider extends StatelessWidget {
               radius: _thumbRadius,
               activeColor: _activeColor,
             ),
-            tickMarkShape: RoundSliderTickMarkShape(tickMarkRadius: 2),
+            tickMarkShape: const RoundSliderTickMarkShape(tickMarkRadius: 2),
             activeTickMarkColor: Colors.white.withAlpha(153),
             inactiveTickMarkColor: _activeColor.withAlpha(102),
           ),

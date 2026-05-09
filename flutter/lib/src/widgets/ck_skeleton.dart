@@ -97,7 +97,7 @@ class _CkSkeletonState extends State<CkSkeleton>
             padding: EdgeInsets.only(bottom: isLast ? 0 : 8),
             child: AnimatedBuilder(
               animation: _animation,
-              builder: (_, __) => Container(
+              builder: (context, child) => Container(
                 width: isLast
                     ? (widget.width ?? double.infinity) * 0.75
                     : widget.width ?? double.infinity,
@@ -119,7 +119,7 @@ class _CkSkeletonState extends State<CkSkeleton>
 
     return AnimatedBuilder(
       animation: _animation,
-      builder: (_, __) => Container(
+      builder: (context, child) => Container(
         width: widget.width ?? _defaultWidth,
         height: widget.height ?? _defaultHeight,
         decoration: BoxDecoration(
