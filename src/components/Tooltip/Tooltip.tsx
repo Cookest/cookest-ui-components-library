@@ -1,76 +1,66 @@
 "use client";
 
-import { useState, useRef, type ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import * as React from "react";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+
 import { cn } from "../../utils/cn";
 
 export type TooltipPosition = "top" | "bottom" | "left" | "right";
 
-export interface TooltipProps {
-  content: string;
+export interface TooltipProps
+  extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root> {
+  content?: React.ReactNode;
   position?: TooltipPosition;
-  delay?: number;
   className?: string;
-  children: ReactNode;
+  delay?: number;
 }
 
-const positionStyles: Record<TooltipPosition, string> = {
-  top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-  bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-  left: "right-full top-1/2 -translate-y-1/2 mr-2",
-  right: "left-full top-1/2 -translate-y-1/2 ml-2",
-};
+const TooltipProvider = TooltipPrimitive.Provider;
 
-const motionVariants: Record<TooltipPosition, { initial: Record<string, number>; animate: Record<string, number> }> = {
-  top: { initial: { opacity: 0, y: 4 }, animate: { opacity: 1, y: 0 } },
-  bottom: { initial: { opacity: 0, y: -4 }, animate: { opacity: 1, y: 0 } },
-  left: { initial: { opacity: 0, x: 4 }, animate: { opacity: 1, x: 0 } },
-  right: { initial: { opacity: 0, x: -4 }, animate: { opacity: 1, x: 0 } },
-};
+const TooltipTrigger = TooltipPrimitive.Trigger;
 
-export function Tooltip({ content, position = "top", delay = 200, className, children }: TooltipProps) {
-  const [visible, setVisible] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+const TooltipContent = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
+>(({ className, sideOffset = 4, ...props }, ref) => (
+  <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Content
+      ref={ref}
+      sideOffset={sideOffset}
+      className={cn(
+        "z-50 overflow-hidden rounded-md border border-[var(--ck-border)] bg-[var(--ck-surface)] px-3 py-1.5 text-xs text-[var(--ck-heading)] shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        className
+      )}
+      {...props}
+    />
+  </TooltipPrimitive.Portal>
+));
+TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-  const show = () => {
-    timeoutRef.current = setTimeout(() => setVisible(true), delay);
-  };
-
-  const hide = () => {
-    clearTimeout(timeoutRef.current);
-    setVisible(false);
-  };
-
-  const variants = motionVariants[position];
-
-  return (
-    <span
-      className="relative inline-flex"
-      onMouseEnter={show}
-      onMouseLeave={hide}
-      onFocus={show}
-      onBlur={hide}
-    >
-      {children}
-      <AnimatePresence>
-        {visible && (
-          <motion.span
-            role="tooltip"
-            initial={variants.initial}
-            animate={variants.animate}
-            exit={variants.initial}
-            transition={{ duration: 0.15 }}
-            className={cn(
-              "pointer-events-none absolute z-50 whitespace-nowrap rounded-lg bg-[var(--ck-heading)] px-3 py-1.5 font-sans text-xs font-medium text-white shadow-lg",
-              "dark:bg-[var(--ck-surface)] dark:text-[var(--ck-heading)]",
-              positionStyles[position],
-              className,
-            )}
-          >
+const Tooltip = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Trigger>,
+  TooltipProps
+>(({ content, position = "top", delay = 200, className, children, ...props }, ref) => {
+  if (content !== undefined) {
+    // Legacy support for custom Cookest UI Tooltip
+    return (
+      <TooltipProvider delayDuration={delay}>
+        <TooltipPrimitive.Root {...props}>
+          <TooltipTrigger asChild ref={ref}>
+            {children}
+          </TooltipTrigger>
+          <TooltipContent side={position} className={className}>
             {content}
-          </motion.span>
-        )}
-      </AnimatePresence>
-    </span>
-  );
-}
+          </TooltipContent>
+        </TooltipPrimitive.Root>
+      </TooltipProvider>
+    );
+  }
+
+  // Radix UI Tooltip Root (Shadcn style)
+  return <TooltipPrimitive.Root {...props}>{children}</TooltipPrimitive.Root>;
+});
+
+Tooltip.displayName = "Tooltip";
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
