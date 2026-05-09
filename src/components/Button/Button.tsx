@@ -37,7 +37,7 @@ export const buttonSizeStyles: Record<ButtonSize, string> = {
 };
 
 export const buttonBaseStyles =
-  "relative inline-flex cursor-pointer items-center justify-center font-sans font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ck-primary)] disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden";
+  "relative inline-flex flex-row cursor-pointer items-center justify-center font-sans font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ck-primary)] disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden whitespace-nowrap";
 
 function LoadingSpinner({ className }: { className?: string }) {
   return (
