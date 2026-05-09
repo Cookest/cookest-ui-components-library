@@ -151,7 +151,6 @@ class CkSlider extends StatelessWidget {
         SliderTheme(
           data: SliderThemeData(
             trackHeight: _trackHeight,
-            thumbRadius: _thumbRadius,
             activeTrackColor: _activeColor,
             inactiveTrackColor: trackInactiveColor,
             thumbColor: Colors.white,
