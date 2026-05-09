@@ -122,6 +122,36 @@ class _CkTabsState extends State<CkTabs> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildUnderlineBar(bool isDark) {
+    final tabWidgets = widget.items.map((tab) {
+      final active = tab.id == _activeTab;
+      final tabChild = GestureDetector(
+        onTap: () => _selectTab(tab.id),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: active
+                    ? CookestTokens.colorPrimaryDEFAULT
+                    : Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+          child: Align(
+            alignment: Alignment.center,
+            child: _tabLabel(tab, active, isDark),
+          ),
+        ),
+      );
+
+      if (widget.fullWidth) {
+        return Expanded(child: tabChild);
+      }
+      return tabChild;
+    }).toList();
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -131,54 +161,42 @@ class _CkTabsState extends State<CkTabs> with SingleTickerProviderStateMixin {
         ),
       ),
       child: Row(
-        children: widget.items.map((tab) {
-          final active = tab.id == _activeTab;
-          return GestureDetector(
-            onTap: () => _selectTab(tab.id),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: active
-                        ? CookestTokens.colorPrimaryDEFAULT
-                        : Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-              ),
-              child: _tabLabel(tab, active, isDark),
-            ),
-          );
-        }).toList(),
+        children: tabWidgets,
       ),
     );
   }
 
   Widget _buildPillsBar(bool isDark) {
-    return Row(
-      children: widget.items.map((tab) {
-        final active = tab.id == _activeTab;
-        return Padding(
-          padding: const EdgeInsets.only(right: 4),
-          child: GestureDetector(
-            onTap: () => _selectTab(tab.id),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: active
-                    ? CookestTokens.colorPrimaryDEFAULT
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(CookestTokens.radiusFull),
-              ),
+    final tabWidgets = widget.items.map((tab) {
+      final active = tab.id == _activeTab;
+      final tabChild = Padding(
+        padding: const EdgeInsets.only(right: 4),
+        child: GestureDetector(
+          onTap: () => _selectTab(tab.id),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              color: active
+                  ? CookestTokens.colorPrimaryDEFAULT
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(CookestTokens.radiusFull),
+            ),
+            child: Align(
+              alignment: Alignment.center,
               child: _tabLabel(tab, active, isDark, forceLight: active),
             ),
           ),
-        );
-      }).toList(),
-    );
+        ),
+      );
+
+      if (widget.fullWidth) {
+        return Expanded(child: tabChild);
+      }
+      return tabChild;
+    }).toList();
+
+    return Row(children: tabWidgets);
   }
 
   Widget _buildBoxedBar(bool isDark) {
@@ -238,50 +256,53 @@ class _CkTabsState extends State<CkTabs> with SingleTickerProviderStateMixin {
             ? CookestTokens.colorPrimaryDEFAULT
             : mutedColor;
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (tab.icon != null)
-          Padding(
-            padding: const EdgeInsets.only(right: 6),
-            child: IconTheme(
-              data: IconThemeData(color: textColor, size: 16),
-              child: tab.icon!,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (tab.icon != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 6),
+              child: IconTheme(
+                data: IconThemeData(color: textColor, size: 16),
+                child: tab.icon!,
+              ),
+            ),
+          Text(
+            tab.label,
+            style: GoogleFonts.inter(
+              fontSize: CookestTokens.fontSizeSm,
+              fontWeight:
+                  active ? CookestTokens.fontWeightSemibold : CookestTokens.fontWeightNormal,
+              color: textColor,
             ),
           ),
-        Text(
-          tab.label,
-          style: GoogleFonts.inter(
-            fontSize: CookestTokens.fontSizeSm,
-            fontWeight:
-                active ? CookestTokens.fontWeightSemibold : CookestTokens.fontWeightNormal,
-            color: textColor,
-          ),
-        ),
-        if (tab.badge != null)
-          Padding(
-            padding: const EdgeInsets.only(left: 6),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-              decoration: BoxDecoration(
-                color: active
-                    ? CookestTokens.colorPrimaryDEFAULT.withAlpha(25)
-                    : (isDark
-                        ? CookestTokens.colorBorderDark
-                        : CookestTokens.colorBorderLight),
-                borderRadius: BorderRadius.circular(CookestTokens.radiusFull),
-              ),
-              child: Text(
-                tab.badge!,
-                style: TextStyle(
-                  fontSize: CookestTokens.fontSizeXs,
-                  fontWeight: CookestTokens.fontWeightMedium,
-                  color: active ? CookestTokens.colorPrimaryDEFAULT : mutedColor,
+          if (tab.badge != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 6),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                decoration: BoxDecoration(
+                  color: active
+                      ? CookestTokens.colorPrimaryDEFAULT.withAlpha(25)
+                      : (isDark
+                          ? CookestTokens.colorBorderDark
+                          : CookestTokens.colorBorderLight),
+                  borderRadius: BorderRadius.circular(CookestTokens.radiusFull),
+                ),
+                child: Text(
+                  tab.badge!,
+                  style: TextStyle(
+                    fontSize: CookestTokens.fontSizeXs,
+                    fontWeight: CookestTokens.fontWeightMedium,
+                    color: active ? CookestTokens.colorPrimaryDEFAULT : mutedColor,
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
