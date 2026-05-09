@@ -51,7 +51,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           whileHover={{ y: -2, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
           transition={{ duration: 0.2 }}
           className={cn(
-            "rounded-xl font-sans",
+            "rounded-xl font-sans overflow-hidden",
             variantStyles[variant],
             paddingStyles[padding],
             className,
@@ -67,7 +67,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-xl font-sans",
+          "rounded-xl font-sans overflow-hidden",
           variantStyles[variant],
           paddingStyles[padding],
           className,
