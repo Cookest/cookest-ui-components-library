@@ -1,13 +1,14 @@
 "use client";
 
-import { type HTMLAttributes, type ReactNode } from "react";
+import * as React from "react";
+import { type ReactNode } from "react";
 import { cn } from "../../utils/cn";
 
 export type BadgeVariant = "default" | "success" | "warning" | "error" | "info";
 export type BadgeSize = "sm" | "md" | "lg";
 
 /** Props for the {@link Badge} component. */
-export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "className"> {
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Colour variant conveying semantic meaning. Defaults to `'default'`. */
   variant?: BadgeVariant;
   /** Badge size. Defaults to `'md'`. */

@@ -49,7 +49,7 @@ const ToggleGroupItem = React.forwardRef<
       ref={ref}
       className={cn(
         "inline-flex items-center justify-center rounded-md font-medium transition-colors hover:bg-[var(--ck-bg-card)] hover:text-[var(--ck-heading)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ck-primary)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-[var(--ck-bg-card)] data-[state=on]:text-[var(--ck-heading)]",
-        sizeStyles[itemSize],
+        sizeStyles[itemSize as keyof typeof sizeStyles],
         className
       )}
       {...props}

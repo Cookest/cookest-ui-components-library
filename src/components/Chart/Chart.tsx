@@ -100,11 +100,16 @@ ${colorConfig
   );
 };
 
-const ChartTooltip = RechartsPrimitive.Tooltip;
+const ChartTooltip = RechartsPrimitive.Tooltip as unknown as React.ComponentType<
+  RechartsPrimitive.TooltipProps<TooltipValueType, TooltipNameType>
+>;
+
+type TooltipValueType = number | string | Array<number | string>;
+type TooltipNameType = number | string;
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+  RechartsPrimitive.TooltipProps<TooltipValueType, TooltipNameType> &
     React.ComponentProps<"div"> & {
       hideLabel?: boolean;
       hideIndicator?: boolean;

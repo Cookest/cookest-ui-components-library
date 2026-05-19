@@ -13,6 +13,7 @@ export interface TooltipProps
   position?: TooltipPosition;
   className?: string;
   delay?: number;
+  children?: React.ReactNode;
 }
 
 const TooltipProvider = TooltipPrimitive.Provider;
