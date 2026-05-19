@@ -7,13 +7,20 @@ import { cn } from "../../utils/cn";
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
+/** Props for the {@link Button} component. */
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> {
+  /** Visual style variant. Defaults to `'primary'`. */
   variant?: ButtonVariant;
+  /** Control size. Defaults to `'md'`. */
   size?: ButtonSize;
+  /** Shows a loading spinner and disables the button when `true`. */
   loading?: boolean;
+  /** Icon rendered to the left of the label. */
   iconLeft?: ReactNode;
+  /** Icon rendered to the right of the label. */
   iconRight?: ReactNode;
+  /** Expands the button to 100% container width. */
   fullWidth?: boolean;
   className?: string;
   children: ReactNode;
@@ -68,6 +75,10 @@ function LoadingSpinner({ className }: { className?: string }) {
   );
 }
 
+/**
+ * Primary interactive button. Supports 4 variants (`primary`, `secondary`, `ghost`, `danger`)
+ * and 3 sizes. Includes a built-in loading state with spinner.
+ */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {

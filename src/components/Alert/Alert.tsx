@@ -7,13 +7,21 @@ import { cn } from "../../utils/cn";
 export type AlertVariant = "info" | "success" | "warning" | "error";
 export type AlertSize = "sm" | "md" | "lg";
 
+/** Props for the {@link Alert} component. */
 export interface AlertProps {
+  /** Semantic colour variant. Defaults to `'info'`. */
   variant?: AlertVariant;
+  /** Visual size. Defaults to `'md'`. */
   size?: AlertSize;
+  /** Bold heading rendered above the body text. */
   title?: string;
+  /** Renders a dismiss (×) button when `true`. */
   dismissible?: boolean;
+  /** Called when the dismiss button is clicked. */
   onDismiss?: () => void;
+  /** Overrides the default variant icon. */
   icon?: ReactNode;
+  /** Hides the alert with an exit animation when `false`. Defaults to `true`. */
   visible?: boolean;
   className?: string;
   children: ReactNode;
@@ -90,6 +98,10 @@ const iconMap: Record<AlertVariant, (size: number) => ReactNode> = {
   ),
 };
 
+/**
+ * Animated feedback banner for info, success, warning, or error states.
+ * Includes a left accent bar, variant icon, and optional dismiss button.
+ */
 export function Alert({
   variant = "info",
   size = "md",

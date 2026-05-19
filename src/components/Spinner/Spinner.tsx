@@ -6,9 +6,13 @@ import { cn } from "../../utils/cn";
 export type SpinnerSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type SpinnerColor = "primary" | "white" | "current";
 
+/** Props for the {@link Spinner} component. */
 export interface SpinnerProps {
+  /** Diameter of the spinner. Defaults to `'md'`. */
   size?: SpinnerSize;
+  /** Stroke colour source. Defaults to `'primary'`. */
   color?: SpinnerColor;
+  /** Screen-reader label. Defaults to `'Loading…'`. */
   label?: string;
   className?: string;
 }
@@ -27,6 +31,10 @@ const colorValues: Record<SpinnerColor, string> = {
   current: "currentColor",
 };
 
+/**
+ * Animated circular loading indicator.
+ * Uses CSS-token-driven stroke colour and is screen-reader accessible via `role="status"`.
+ */
 export function Spinner({
   size = "md",
   color = "primary",

@@ -6,11 +6,17 @@ import { cn } from "../../utils/cn";
 export type BadgeVariant = "default" | "success" | "warning" | "error" | "info";
 export type BadgeSize = "sm" | "md" | "lg";
 
+/** Props for the {@link Badge} component. */
 export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, "className"> {
+  /** Colour variant conveying semantic meaning. Defaults to `'default'`. */
   variant?: BadgeVariant;
+  /** Badge size. Defaults to `'md'`. */
   size?: BadgeSize;
+  /** Renders a small coloured dot before the label. */
   dot?: boolean;
+  /** Shows a remove (×) button when `true`. */
   removable?: boolean;
+  /** Called when the remove button is clicked. */
   onRemove?: () => void;
   className?: string;
   children: ReactNode;
@@ -38,6 +44,10 @@ const sizeStyles: Record<BadgeSize, string> = {
   lg: "px-3 py-1.5 text-sm",
 };
 
+/**
+ * Inline label badge for status, category, or count display.
+ * Supports 5 semantic colour variants and an optional removable affordance.
+ */
 export function Badge({
   variant = "default",
   size = "md",

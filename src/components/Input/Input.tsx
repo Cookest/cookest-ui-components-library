@@ -5,14 +5,22 @@ import { cn } from "../../utils/cn";
 
 export type InputSize = "sm" | "md" | "lg";
 
+/** Props for the {@link Input} component. */
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "className"> {
+  /** Accessible label rendered above the input. */
   label?: string;
+  /** Hint text shown below the input when there is no error. */
   helperText?: string;
+  /** Error message — sets `aria-invalid` and styles the border red. */
   error?: string;
+  /** Icon rendered inside the left edge of the input. */
   iconLeft?: ReactNode;
+  /** Icon rendered inside the right edge of the input. */
   iconRight?: ReactNode;
+  /** Visual size of the input field. Defaults to `'md'`. */
   inputSize?: InputSize;
+  /** Expands the wrapper to 100% container width. */
   fullWidth?: boolean;
   className?: string;
 }
@@ -35,6 +43,10 @@ const sizeStyles: Record<InputSize, { wrapper: string; input: string; label: str
   },
 };
 
+/**
+ * Accessible text input field with optional label, helper text, error state, and icon slots.
+ * Generates a stable `id` automatically when none is provided.
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {

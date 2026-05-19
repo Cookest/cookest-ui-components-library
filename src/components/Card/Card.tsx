@@ -6,8 +6,11 @@ import { cn } from "../../utils/cn";
 
 export type CardVariant = "default" | "interactive" | "outlined";
 
+/** Props for the {@link Card} root component. */
 export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, "className"> {
+  /** Visual style: `'default'`, `'interactive'` (hover lift), or `'outlined'`. Defaults to `'default'`. */
   variant?: CardVariant;
+  /** Internal padding scale. Defaults to `'md'`. */
   padding?: "none" | "sm" | "md" | "lg";
   className?: string;
   children: ReactNode;
@@ -42,6 +45,10 @@ const paddingStyles = {
   lg: "p-7",
 };
 
+/**
+ * Rounded surface container. The `'interactive'` variant adds a subtle hover-lift animation.
+ * Compose with {@link CardHeader}, {@link CardBody}, and {@link CardFooter} for structured layouts.
+ */
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ variant = "default", padding = "md", className, children, ...props }, ref) => {
     if (variant === "interactive") {

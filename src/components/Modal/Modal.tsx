@@ -6,15 +6,23 @@ import { cn } from "../../utils/cn";
 
 export type ModalSize = "sm" | "md" | "lg";
 
+/** Props for the {@link Modal} component. */
 export interface ModalProps {
+  /** Controls modal visibility. */
   open: boolean;
+  /** Called when the modal should close (ESC key, backdrop click, or close button). */
   onClose: () => void;
+  /** Optional heading shown in the modal header. */
   title?: string;
+  /** Width constraint. Defaults to `'md'`. */
   size?: ModalSize;
+  /** Close on backdrop click. Defaults to `true`. */
   closeOnBackdrop?: boolean;
+  /** Close on Escape key. Defaults to `true`. */
   closeOnEsc?: boolean;
   className?: string;
   children: ReactNode;
+  /** Optional content rendered in the footer action area. */
   footer?: ReactNode;
 }
 
@@ -24,6 +32,10 @@ const sizeStyles: Record<ModalSize, string> = {
   lg: "max-w-2xl",
 };
 
+/**
+ * Accessible modal dialog with focus trapping, scroll-lock, and animated enter/exit.
+ * Renders via a fixed overlay with a semi-transparent backdrop.
+ */
 export function Modal({
   open,
   onClose,
