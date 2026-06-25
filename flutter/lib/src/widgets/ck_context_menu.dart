@@ -21,11 +21,13 @@ class CkContextMenu<T> extends StatelessWidget {
     required this.child,
     required this.items,
     required this.onSelected,
+    this.triggerOnTap = false,
   });
 
   final Widget child;
   final List<CkContextMenuItem<T>> items;
   final ValueChanged<T> onSelected;
+  final bool triggerOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,43 +39,46 @@ class CkContextMenu<T> extends StatelessWidget {
         ? CookestTokens.colorHeadingDark
         : CookestTokens.colorHeadingLight;
 
-    return GestureDetector(
-      onSecondaryTapDown: (details) {
-        final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
-        showMenu<T>(
-          context: context,
-          position: RelativeRect.fromRect(
-            details.globalPosition & const Size(40, 40),
-            Offset.zero & overlay.size,
+    void show(Offset globalPosition) {
+      final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+      showMenu<T>(
+        context: context,
+        position: RelativeRect.fromRect(
+          globalPosition & const Size(40, 40),
+          Offset.zero & overlay.size,
+        ),
+        color: surfaceColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(CookestTokens.radiusMd),
+          side: BorderSide(
+            color: isDark ? CookestTokens.colorBorderDark : CookestTokens.colorBorderLight,
           ),
-          color: surfaceColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(CookestTokens.radiusMd),
-            side: BorderSide(
-              color: isDark ? CookestTokens.colorBorderDark : CookestTokens.colorBorderLight,
-            ),
-          ),
-          items: items.map((item) {
-            return PopupMenuItem<T>(
-              value: item.value,
-              child: Row(
-                children: [
-                  if (item.icon != null) ...[
-                    item.icon!,
-                    const SizedBox(width: 12),
-                  ],
-                  Text(
-                    item.label,
-                    style: TextStyle(color: headingColor, fontSize: 14),
-                  ),
+        ),
+        items: items.map((item) {
+          return PopupMenuItem<T>(
+            value: item.value,
+            child: Row(
+              children: [
+                if (item.icon != null) ...[
+                  item.icon!,
+                  const SizedBox(width: 12),
                 ],
-              ),
-            );
-          }).toList(),
-        ).then((value) {
-          if (value != null) onSelected(value);
-        });
-      },
+                Text(
+                  item.label,
+                  style: TextStyle(color: headingColor, fontSize: 14),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
+      ).then((value) {
+        if (value != null) onSelected(value);
+      });
+    }
+
+    return GestureDetector(
+      onSecondaryTapDown: (details) => show(details.globalPosition),
+      onTapDown: triggerOnTap ? (details) => show(details.globalPosition) : null,
       child: child,
     );
   }
