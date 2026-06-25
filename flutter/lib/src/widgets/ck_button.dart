@@ -86,11 +86,14 @@ class _CkButtonState extends State<CkButton> {
   }
 
   Color get _backgroundColor {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (widget.variant) {
       case CkButtonVariant.primary:
         return CookestTokens.colorPrimaryDEFAULT;
       case CkButtonVariant.secondary:
-        return Colors.transparent;
+        return isDark
+            ? CookestTokens.colorSurfaceDark
+            : CookestTokens.colorSurfaceLight;
       case CkButtonVariant.ghost:
         return Colors.transparent;
       case CkButtonVariant.danger:
@@ -118,8 +121,7 @@ class _CkButtonState extends State<CkButton> {
         ? CookestTokens.colorBorderDark
         : CookestTokens.colorBorderLight;
 
-    final backgroundColor = (widget.variant == CkButtonVariant.secondary ||
-            widget.variant == CkButtonVariant.ghost)
+    final backgroundColor = widget.variant == CkButtonVariant.ghost
         ? Colors.transparent
         : _backgroundColor.withAlpha(_disabled ? 128 : 255);
 
