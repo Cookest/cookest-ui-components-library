@@ -118,8 +118,13 @@ class _CkButtonState extends State<CkButton> {
         ? CookestTokens.colorBorderDark
         : CookestTokens.colorBorderLight;
 
+    final backgroundColor = (widget.variant == CkButtonVariant.secondary ||
+            widget.variant == CkButtonVariant.ghost)
+        ? Colors.transparent
+        : _backgroundColor.withAlpha(_disabled ? 128 : 255);
+
     return BoxDecoration(
-      color: _backgroundColor.withAlpha(_disabled ? 128 : 255),
+      color: backgroundColor,
       borderRadius: BorderRadius.circular(_radius),
       border: widget.variant == CkButtonVariant.secondary
           ? Border.all(color: borderColor)
