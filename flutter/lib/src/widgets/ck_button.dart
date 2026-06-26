@@ -153,7 +153,6 @@ class _CkButtonState extends State<CkButton> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeOut,
-        alignment: Alignment.center,
         transform: Matrix4.identity()
           ..scale(_pressed ? 0.98 : 1.0)
           ..translate(0.0, _pressed ? 0.0 : (_disabled ? 0.0 : -0.5)),
