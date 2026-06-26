@@ -26,12 +26,12 @@
 }
 
 .dark {
-  --ck-bg: #0e1512;
-  --ck-bg-card: #172019;
-  --ck-heading: #e0ede4;
-  --ck-text: #b0c8b5;
-  --ck-text-muted: #6a8a70;
-  --ck-border: #253d2e;
-  --ck-surface: #1a261e;
-  --ck-surface-muted: rgba(14, 21, 18, 0.95);
+  --ck-bg: #0b0f0d;
+  --ck-bg-card: #131815;
+  --ck-heading: #f2f4f3;
+  --ck-text: #c4cbc7;
+  --ck-text-muted: #7d8781;
+  --ck-border: #242b27;
+  --ck-surface: #1b211e;
+  --ck-surface-muted: rgba(11, 15, 13, 0.95);
 }

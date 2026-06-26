@@ -25,21 +25,21 @@ class CookestTokens {
   /// Page background — light mode
   static const Color colorBackgroundLight = Color(0xFFF5F5F0);
   /// Page background — dark mode
-  static const Color colorBackgroundDark = Color(0xFF0E1512);
+  static const Color colorBackgroundDark = Color(0xFF0B0F0D);
   static const Color colorCardLight = Color(0xFFFAFAF6);
-  static const Color colorCardDark = Color(0xFF172019);
+  static const Color colorCardDark = Color(0xFF131815);
   static const Color colorHeadingLight = Color(0xFF1C3A2A);
-  static const Color colorHeadingDark = Color(0xFFE0EDE4);
+  static const Color colorHeadingDark = Color(0xFFF2F4F3);
   static const Color colorTextLight = Color(0xFF3D5040);
-  static const Color colorTextDark = Color(0xFFB0C8B5);
+  static const Color colorTextDark = Color(0xFFC4CBC7);
   static const Color colorMutedLight = Color(0xFF7A8E74);
-  static const Color colorMutedDark = Color(0xFF6A8A70);
+  static const Color colorMutedDark = Color(0xFF7D8781);
   static const Color colorBorderLight = Color(0xFFE4EBE0);
-  static const Color colorBorderDark = Color(0xFF253D2E);
+  static const Color colorBorderDark = Color(0xFF242B27);
   static const Color colorSurfaceLight = Color(0xFFFFFFFF);
-  static const Color colorSurfaceDark = Color(0xFF1A261E);
+  static const Color colorSurfaceDark = Color(0xFF1B211E);
   static const Color colorSurfaceMutedLight = Color(0XF2F5F5F0);
-  static const Color colorSurfaceMutedDark = Color(0XF20E1512);
+  static const Color colorSurfaceMutedDark = Color(0XF20B0F0D);
   static const Color colorStatusSuccess = Color(0xFF4CAF50);
   static const Color colorStatusWarning = Color(0xFFFF9800);
   static const Color colorStatusError = Color(0xFFF44336);
