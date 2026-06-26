@@ -180,15 +180,17 @@ class _CkButtonState extends State<CkButton> {
                 padding: EdgeInsets.only(right: _gap),
                 child: widget.iconLeft!,
               ),
-            Opacity(
-              opacity: widget.loading ? 0.7 : 1.0,
-              child: DefaultTextStyle(
-                style: GoogleFonts.inter(
-                  fontSize: _fontSize,
-                  fontWeight: CookestTokens.fontWeightSemibold,
-                  color: _foregroundColor,
+            Flexible(
+              child: Opacity(
+                opacity: widget.loading ? 0.7 : 1.0,
+                child: DefaultTextStyle(
+                  style: GoogleFonts.inter(
+                    fontSize: _fontSize,
+                    fontWeight: CookestTokens.fontWeightSemibold,
+                    color: _foregroundColor,
+                  ),
+                  child: widget.child,
                 ),
-                child: widget.child,
               ),
             ),
             if (!widget.loading && widget.iconRight != null)
